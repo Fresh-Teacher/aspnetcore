@@ -503,7 +503,7 @@ public class UnaryServerCallHandlerTests : LoggedTest
             invoker,
             descriptorInfo: TestHelpers.CreateDescriptorInfo(bodyDescriptor: HelloRequest.Descriptor));
         var httpContext = TestHelpers.CreateHttpContext();
-        httpContext.Request.Body = new MemoryStream("{}"u8);
+        httpContext.Request.Body = new MemoryStream("{}"u8.ToArray());
         httpContext.Request.ContentType = contentType;
         // Act
         await unaryServerCallHandler.HandleCallAsync(httpContext);
@@ -707,7 +707,7 @@ public class UnaryServerCallHandlerTests : LoggedTest
 
         var httpContext = TestHelpers.CreateHttpContext();
         httpContext.Request.ContentType = "application/json";
-        httpContext.Request.Body = new MemoryStream("null"u8);
+        httpContext.Request.Body = new MemoryStream("null"u8.ToArray());
 
         // Act
         await unaryServerCallHandler.HandleCallAsync(httpContext);
